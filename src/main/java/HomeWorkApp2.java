@@ -6,7 +6,7 @@ public class HomeWorkApp2 {
         posOrNeg(-10);
         System.out.println("Задача3 решена: " + posOrNegTrueOrFalse(-5));
         stringPrintN("Привет всем!", 10);
-        System.out.println("Задача 5 решена: " + leapYearTrueOrNotaLeapYearFalse(2019));
+        System.out.println("Задача 5 решена: " + leapYearTrueOrNotaLeapYearFalse(2020));
     }
 
     public static boolean sumWhen10or20(int a, int b) {
