@@ -53,6 +53,12 @@ public class MineSweeper {
 
     private static int[][] generateBoard() {
         int[][] board = new int[HEIGHT][WIDTH];
+        placeMines(board);
+        calculateMines(board);
+        return board;
+    }
+
+    private static void placeMines(int[][] board) {
         Random random = new Random();
         int mines = MINES_COUNT;
         if (mines >= HEIGHT * WIDTH) mines = HEIGHT * WIDTH; // Добавил... если кол - во мин не вмещается в поле, кол-во мин ограничивается полем
@@ -65,9 +71,6 @@ public class MineSweeper {
                 board[x][y] = MINE;
                 mines--; // кол во мин уменьшаем на 1 каждый раз
         }
-        calculateMines(board);
-        return board;
-
     }
 
     private static void calculateMines(int[][] board) {
