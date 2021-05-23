@@ -49,7 +49,7 @@ public class HomeWorkApp2 {
                 return false;
             }
         }
-        else if (y % 4==0 || y % 400 ==0) {
+        else if (y % 4 == 0 || y % 400 == 0) {
             return true;
         }
         else {

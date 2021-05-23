@@ -129,7 +129,6 @@ public class HomeWorkApp3 {
            } else if (n == 0) {
                break;
            }
-
         }
         System.out.println(Arrays.toString(argb));
     }
