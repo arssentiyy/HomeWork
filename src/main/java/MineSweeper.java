@@ -7,7 +7,7 @@ public class MineSweeper {
 
     public static final int HEIGHT = 10;
     public static final int WIDTH = 10;
-    public static final int MINES_COUNT = 10;
+    public static final int MINES_COUNT = 20;
     public static final int MINE = 1000;
     public static final int EMPTY = 0;
 
