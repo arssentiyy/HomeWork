@@ -31,7 +31,7 @@ public class MineSweeper {
         if (win) {
             System.out.println("Вы отрыли все мины! Поздравляю!");
         } else {
-            System.out.println("Сапер ошибается 1 раз! Но вы можете больше! А пока вы проиграли!");
+            System.out.println("Вы проиграли!");
         }
     }
 
@@ -46,6 +46,7 @@ public class MineSweeper {
         } while (isPassMove && !win);
             return isPassMove;
         }
+
     private static boolean isWin(int[][] moves){
         int openCell = 0;
         for (int[] lines : moves) {
@@ -58,6 +59,7 @@ public class MineSweeper {
 
         return openCell + MINES_COUNT == HEIGHT * WIDTH;
     }
+
     private static boolean makeMove(int[][] board, int[][] moves) {
        printBoard(board, moves);
        Scanner scanner = new Scanner(System.in);
@@ -118,7 +120,7 @@ public class MineSweeper {
         }
     }
 
-    private static void OpenField(int[][] board, int i, int j) {
+    private static void OpenField(int[][] board, int i, int j) { // Добавил... метод
         System.out.print(getColorCode(board[i][j]));
         switch (board[i][j]) {
             case EMPTY:
@@ -151,8 +153,6 @@ public class MineSweeper {
         }
         return null;
     }
-
-
 
     private static int[][] generateBoard() {
         int[][] board = placeMines();
@@ -202,6 +202,5 @@ public class MineSweeper {
         }
         return mCount;
     }
-
 
 }
