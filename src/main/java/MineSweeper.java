@@ -1,5 +1,6 @@
 package ru.geekbrains;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,11 +16,14 @@ public class MineSweeper {
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
 
-    public static final int HEIGHT = 10;
-    public static final int WIDTH = 10;
-    public static final int MINES_COUNT = 20;
+    public static final int HEIGHT = 5;
+    public static final int WIDTH = 5;
+    public static final int MINES_COUNT = 4;
     public static final int MINE = 1000;
     public static final int EMPTY = 0;
+    private static final int CELL_OPEN = 1;
+    private static final int CELL_CLOSE = 0;
+    private static final int CELL_FLAG = -1;
 
 
     public static void main(String[] args) {
@@ -33,21 +37,63 @@ public class MineSweeper {
 
     private static boolean play() {
         int[][] board = generateBoard();
-        boolean isPass = move(board);
-        printBoard(board);
-        return true;
+        int[][] moves = new int [HEIGHT][WIDTH];
+        boolean isPassMove;
+        boolean win;
+        do {
+            isPassMove = makeMove(board, moves);
+            win = isWin(moves);
+        } while (isPassMove && !win);
+            return isPassMove;
+        }
+    private static boolean isWin(int[][] moves){
+        int openCell = 0;
+        for (int[] lines : moves) {
+            for (int cell : lines) {
+                if (cell == CELL_OPEN) {
+                    openCell++;
+                }
+            }
+        }
+
+        return openCell + MINES_COUNT == HEIGHT * WIDTH;
     }
+    private static boolean makeMove(int[][] board, int[][] moves) {
+       printBoard(board, moves);
+       Scanner scanner = new Scanner(System.in);
+       int row, line;
+       boolean flag = false;
+       while (true) {
+           System.out.print("Ваш ход:");
+           String move = scanner.nextLine().trim().toUpperCase();
+           if (move.length() == 2 || move.length() == 3) {
+               row = move.charAt(0) - 'A'; // 1 символ и преобразуем вычитанием
+               line = move.charAt(1) - '0'; // 2 символ и преобразуем вычитанием
+               if (move.length() == 3) {
+                   flag = move.charAt(2) == '*';
+               }
+               if (row < WIDTH && row >= 0 && line < HEIGHT && line>=0) {
+                   break;
+               }
 
-    private static boolean move(int[][] board) {
-       Scanner scanner = new Scanner(Scanner.in);
-       String move = scanner.nextLine();
+           }
 
+           System.out.println("Неправильный ход!");
+       }
+       if (flag) {
+           moves[line][row] = CELL_FLAG;
+           return true;
+       }
 
+       if (board[line][row] != MINE) {
+           moves[line][row] = CELL_OPEN;
+       }
 
+        //System.out.printf("row = %d; line = %d; flag = %b" , row, line, flag);
         return false;
     }
 
-    private static void printBoard(int[][] board) {
+    private static void printBoard(int[][] board, int[][] moves) {
         for (char i = 'A'; i < 'A' + WIDTH ; i++) {
             System.out.print(i == 'A' ? "    A" : " " + i); // Добавил... сразу делаем сдвиг при i == A
         }
@@ -55,20 +101,34 @@ public class MineSweeper {
         for (int i = 0; i < HEIGHT; i++) {
             System.out.printf("%3d", i);
             for (int j = 0; j < WIDTH; j++) {
-                System.out.print(getColorCode(board[i][j]));
-                switch (board[i][j]) {
-                    case EMPTY:
-                        System.out.print(" .");
-                        break;
-                    case MINE:
-                        System.out.print(" *");
-                        break;
-                    default:
-                        System.out.printf("%2d", board[i][j]);
+                if (moves[i][j] == CELL_CLOSE) {
+                    System.out.print("[]");
+                    continue;
                 }
+
+                if (moves[i][j] == CELL_FLAG) {
+                    System.out.print(" \uD83D\uDEA9");
+                    continue;
+                }
+
+                OpenField(board, i, j);
                 System.out.print(ANSI_RESET);
             }
             System.out.println();
+        }
+    }
+
+    private static void OpenField(int[][] board, int i, int j) {
+        System.out.print(getColorCode(board[i][j]));
+        switch (board[i][j]) {
+            case EMPTY:
+                System.out.print(" .");
+                break;
+            case MINE:
+                System.out.print(" *");
+                break;
+            default:
+                System.out.printf("%2d", board[i][j]);
         }
     }
 
