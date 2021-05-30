@@ -6,8 +6,10 @@ public class Employee {
    String phone;
    float salary;
    int age;
+   public static int count;
 
    public Employee(String fullName, String position, String email, String phone, float salary, int age) {
+      count++;
       this.fullName = fullName;
       this.position = position;
       this.email = email;
