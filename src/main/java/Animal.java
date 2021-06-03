@@ -1,4 +1,4 @@
-public abstract class Animal<count> {
+public abstract class Animal {
     abstract void run(int dist);
     abstract void swimming(int dist);
 }
