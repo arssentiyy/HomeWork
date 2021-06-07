@@ -15,7 +15,7 @@ public class Dog extends Animal {
         }
 
     }
-    //sss
+    //ssss
     @Override
     public void swimming(int dist) {
         if (dist > 10) {
