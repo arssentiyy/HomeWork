@@ -8,7 +8,7 @@ public class Dog extends Animal {
     @Override
     public void run(int dist) {
         if (dist > 500) {
-            System.out.println("Максимальный забег собаки не более 500! А ваше параметр = " + dist);
+            System.out.println("Максимальный забег собаки не более 500! А ваш параметр = " + dist);
         }
         else {
             System.out.println("Собака пробежала: " + dist);

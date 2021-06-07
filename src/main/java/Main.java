@@ -5,7 +5,7 @@ public class Main {
 
         Cat cat = new Cat();
 
-        dog.run(100);
+        dog.run(101);
         dog.swimming(200);
 
         cat.run(300);
