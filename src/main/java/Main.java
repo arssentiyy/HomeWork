@@ -13,6 +13,6 @@ public class Main {
 
         System.out.println("Всего собак: " + Dog.count);
         System.out.println("Всего кошек: " + Cat.count);
-
+        //sss
     }
 }

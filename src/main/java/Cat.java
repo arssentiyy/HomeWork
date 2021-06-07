@@ -20,6 +20,6 @@ public class Cat extends Animal {
     public void swimming(int dist) {
         System.out.println("Кошка не умеет плавать!!!");
     }
-
+//sss
 
 }
